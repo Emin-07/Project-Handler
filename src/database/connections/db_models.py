@@ -1,6 +1,6 @@
 from typing import Annotated, List
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, String
 import datetime
 from .db_setup import Base
 import enum
@@ -24,7 +24,7 @@ class Task(Base):
     __tablename__ = "tasks"
 
     id: Mapped[intpk]
-    task_description: Mapped[str]
+    task_description: Mapped[str] = mapped_column(default="", server_default="")
     start_date: Mapped[DateStr]
     end_date: Mapped[DateStr]
     priority: Mapped[Priority] = mapped_column(default=Priority.low_priority)
@@ -51,8 +51,8 @@ class Employee(Base):
 
     id: Mapped[intpk]
 
-    first_name: Mapped[str]
-    last_name: Mapped[str]
+    first_name: Mapped[str] = mapped_column(String(32), default="", server_default="")
+    last_name: Mapped[str] = mapped_column(String(32), default="", server_default="")
     salary: Mapped[int]
     is_working: Mapped[bool] = mapped_column(default=True)
     employee_tasks: Mapped[List["Task"]] = relationship(
@@ -79,7 +79,9 @@ class Project(Base):
     __tablename__ = "projects"
     id: Mapped[intpk]
 
-    project_name: Mapped[str]
+    project_name: Mapped[str] = mapped_column(
+        String(128), default="project_name", server_default="project_name"
+    )
     start_date: Mapped[DateStr]
     end_date: Mapped[DateStr]
     is_completed: Mapped[bool] = mapped_column(default=False)
@@ -95,7 +97,7 @@ class Note(Base):
     __tablename__ = "notes"
 
     id: Mapped[intpk]
-    note_info: Mapped[str]
+    note_info: Mapped[str] = mapped_column(server_default="", default="")
 
     employee_id: Mapped[int] = mapped_column(
         ForeignKey("employees.id", ondelete="CASCADE")

@@ -1,0 +1,117 @@
+services:
+  app:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://$${DB_USER}:$${DB_PASSWORD}@$${DB_HOST}:$${DB_PORT}/$${DB_NAME}"
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    depends_on:
+      pg:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: sync+restart
+          path: .
+          target: /app
+        - action: rebuild
+          path: ./uv.lock
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN                 # ✅ File ownership
+      - SETGID                # ✅ Group ID changes
+      - SETUID                # ✅ User ID changes
+    networks:
+      - app-network
+      - db-network
+      
+  pg:
+    image: postgres:18-alpine3.22
+    restart: always
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PGDATA: /var/lib/postgresql/pgdata
+    volumes:
+      - pgdata:/var/lib/postgresql/pgdata
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN                 # ✅ Data directory
+      - DAC_OVERRIDE          # ✅ File operations
+      - SETGID                # ✅ Group operations
+      - SETUID                # ✅ User operations
+    networks:
+      - db-network
+  
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    depends_on:
+      pg:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    networks:
+      - admin-network
+      - db-network
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+        - PGADMIN_DEFAULT_EMAIL=admin@example.com
+        - PGADMIN_DEFAULT_PASSWORD=admin
+        - PGADMIN_CONFIG_SERVER_MODE=False
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+    depends_on:
+      pg:
+        condition: service_healthy
+
+    healthcheck:
+      test: ["CMD", "wget", "-O", "-", "http://localhost:80/misc/ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - NET_RAW
+      - SYS_ADMIN
+      - SYS_PTRACE
+      - MKNOD
+      - AUDIT_WRITE
+    networks:
+      - admin-network
+      - db-network
+
+volumes:
+  pgdata:
+
+networks:
+  app-network:
+  admin-network:
+  db-network:
+    internal: true

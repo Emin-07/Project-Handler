@@ -1,10 +1,11 @@
 from fastapi import FastAPI, Depends, Request
 from fastapi.responses import JSONResponse
-from routers import employee, notes, projects, tasks
+from src.routers import employee, notes, projects, tasks
 import uvicorn
 from typing import List, Dict
-from database.queries.data_handler import get_global_data, reset_data
-from models import UnexpectedFileFormatExcpetion
+from src.database.queries.data_handler import get_global_data, reset_data
+from src.models import UnexpectedFileFormatExcpetion
+# from prometheus_client import Counter, Summary, generate_latest, CONTENT_TYPE_LATEST
 
 app = FastAPI()
 
@@ -14,15 +15,15 @@ app.include_router(notes.router)
 app.include_router(tasks.router)
 
 
-@app.get("/", response_model=dict[str, str])
-async def read_root() -> dict[str, str]:
+@app.get("/", response_model=Dict[str, str])
+async def read_root() -> Dict[str, str]:
     return {"message": "Hello world"}
 
 
-@app.patch("/", response_model=str)
+@app.patch("/", response_model=Dict)
 async def reset_data_to_default(
-    data_resetter: str = Depends(reset_data),
-) -> str:
+    data_resetter: Dict = Depends(reset_data),
+) -> Dict:
     return data_resetter
 
 
@@ -45,4 +46,4 @@ async def fileformat_exception_handler(
 
 
 if __name__ == "__main__":
-    uvicorn.run(app="main:app", reload=True)
+    uvicorn.run(app="main:app", port=8000, host="0.0.0.0")
