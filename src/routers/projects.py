@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Depends
 from typing import List, Dict, Any, Annotated
 
-from models.project_models import (
+from src.models.project_models import (
     ProjectSchema,
 )
 
-from models.relation_models import ProjectRelSchema
+from src.models.relation_models import ProjectRelSchema
 
 
-from database.queries.project_queries import (
+from src.database.queries.project_queries import (
     get_projects,
     get_project,
     create_projects,

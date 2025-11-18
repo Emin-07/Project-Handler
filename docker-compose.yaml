@@ -32,6 +32,12 @@ services:
       - app-network
       - db-network
       
+  tests:
+    build: .
+    command: pytest
+
+    environment:
+      - TESTING=true
   pg:
     image: postgres:18-alpine3.22
     restart: always
@@ -106,6 +112,7 @@ services:
     networks:
       - admin-network
       - db-network
+
 
 volumes:
   pgdata:

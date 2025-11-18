@@ -2,7 +2,7 @@ FROM python:3.13.8-trixie
 
 ENV PYHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
-
+ENV PYTHONPATH=/app
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 

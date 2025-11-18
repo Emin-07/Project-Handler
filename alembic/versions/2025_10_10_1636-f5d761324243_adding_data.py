@@ -11,8 +11,8 @@ from typing import Sequence, Union
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-from database.queries.data_handler import get_data_sync, add_data_into_db_sync
 from sqlalchemy.orm import Session
+from src.database.queries.data_handler import get_data_sync, add_data_into_db_sync
 # from sqlalchemy import table, column, String, Integer
 
 # revision identifiers, used by Alembic.

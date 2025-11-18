@@ -1,6 +1,6 @@
 import json
 import aiofiles
-from models import UnexpectedFileFormatExcpetion
+from src.models import UnexpectedFileFormatExcpetion
 from sqlalchemy.orm import Session
 from . import *
 

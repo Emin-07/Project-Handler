@@ -4,30 +4,30 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from ..connections.db_models import Task, Note, Employee, Project, TaskEmployees
 from ..connections.db_setup import async_session_factory, async_engine, Base
 
-from models.task_models import (
+from src.models.task_models import (
     TaskBase,
     TaskSchema,
     UpdateTaskSchema,
     TaskEmployeeSchema,
 )
-from models.employee_models import (
+from src.models.employee_models import (
     EmployeeBase,
     EmployeeSchema,
     UpdateEmployeeSchema,
 )
-from models.project_models import (
+from src.models.project_models import (
     ProjectBase,
     ProjectSchema,
     UpdateProjectSchema,
 )
-from models.note_models import (
+from src.models.note_models import (
     NoteBase,
     NoteSchema,
     UpdateNoteSchema,
 )
 
 
-from models.relation_models import (
+from src.models.relation_models import (
     TaskRelSchema,
     EmployeeRelSchema,
     ProjectRelSchema,
