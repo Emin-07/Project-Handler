@@ -1,7 +1,11 @@
 import json
 import aiofiles
+<<<<<<< HEAD:database/queries/data_handler.py
 <<<<<<< HEAD:src/database/queries/data_handler.py
 from src.models import UnexpectedFileFormatExcpetion
+=======
+from models import UnexpectedFileFormatExcpetion
+>>>>>>> parent of 0ed8f11 (улчушил dockerfilы, и нначал добавлять тесты понемногу):src/database/queries/data_handler.py
 from sqlalchemy.orm import Session
 =======
 from models import UnexpectedFileFormatExcpetion

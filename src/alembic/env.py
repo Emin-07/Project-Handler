@@ -4,6 +4,7 @@ from logging.config import fileConfig
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
+<<<<<<< HEAD:alembic/env.py
 <<<<<<< HEAD
 from src.database.connections.db_config import settings
 from src.database.connections.db_models import Task  # noqa
@@ -12,6 +13,11 @@ from src.database.connections.db_setup import Base
 from database.connections.db_models import Employee  # noqa
 from database.connections.db_config import settings
 >>>>>>> parent of 492047d (Docker с Docker-composeбыли добавлены + небольшие изменения)
+=======
+from database.connections.db_config import settings
+from database.connections.db_models import Task  # noqa
+from database.connections.db_setup import Base
+>>>>>>> parent of 0ed8f11 (улчушил dockerfilы, и нначал добавлять тесты понемногу):src/alembic/env.py
 
 from database.connections.db_setup import Base
 from alembic import context

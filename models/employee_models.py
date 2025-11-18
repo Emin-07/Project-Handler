@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field
 from typing import Optional
 
 
@@ -11,7 +11,8 @@ class EmployeeBase(BaseModel):
         default=True, description="Status of Employee if he's working"
     )
 
-    ConfigDict(from_attributes=True)
+    class Config:
+        from_attributes = True
 
 
 class EmployeeSchema(EmployeeBase):

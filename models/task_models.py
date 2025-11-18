@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field
 from typing import Optional
 from . import DateString, Priority
 
@@ -16,7 +16,8 @@ class TaskBase(BaseModel):
     )
     project_id: int = Field(..., description="Project id that this task belongs to")
 
-    ConfigDict(from_attributes=True)
+    class Config:
+        from_attributes = True
 
 
 class TaskSchema(TaskBase):
