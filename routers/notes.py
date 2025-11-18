@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends
 from typing import List
 
-from src.models.note_models import NoteSchema
+from models.note_models import NoteSchema
 
-from src.models.relation_models import NoteRelSchema
+from models.relation_models import NoteRelSchema
 
 
-from src.database.queries.note_queries import (
+from database.queries.note_queries import (
     get_notes,
     get_note,
     create_notes,

@@ -4,10 +4,16 @@ from logging.config import fileConfig
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
+<<<<<<< HEAD
 from src.database.connections.db_config import settings
 from src.database.connections.db_models import Task  # noqa
 from src.database.connections.db_setup import Base
+=======
+from database.connections.db_models import Employee  # noqa
+from database.connections.db_config import settings
+>>>>>>> parent of 492047d (Docker с Docker-composeбыли добавлены + небольшие изменения)
 
+from database.connections.db_setup import Base
 from alembic import context
 
 # this is the Alembic Config object, which provides
@@ -29,7 +35,10 @@ target_metadata = Base.metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
-config.set_main_option("sqlalchemy.url", settings.DATABASE_url_asyncpg)
+
+config.set_main_option(
+    "sqlalchemy.url", settings.DATABASE_url_asyncpg + "?async_fallback=True"
+)
 
 
 def run_migrations_offline() -> None:

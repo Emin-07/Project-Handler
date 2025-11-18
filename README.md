@@ -8,4 +8,4 @@ and finally you can run using either "python3 main.py" or "uvicorn main:app --re
 
 
 
-'If you encountered any bugs or code parts that can be improved i'd appreciate if you lmk'
+'If you encountered any bugs or code parts that can be improved i'd appreciate if you let me know'

@@ -2,13 +2,13 @@ from fastapi import APIRouter, Depends
 from typing import List
 
 
-from src.models.employee_models import (
+from models.employee_models import (
     EmployeeSchema,
 )
 
-from src.models.relation_models import EmployeeRelSchema
+from models.relation_models import EmployeeRelSchema
 
-from src.database.queries.employee_queries import (
+from database.queries.employee_queries import (
     get_employees,
     get_employee,
     create_employees,

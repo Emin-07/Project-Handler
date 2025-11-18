@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from typing import List
 
-from src.models.task_models import TaskSchema
-from src.models.relation_models import TaskRelSchema
+from models.task_models import TaskSchema
+from models.relation_models import TaskRelSchema
 
-from src.database.queries.task_queries import (
+from database.queries.task_queries import (
     get_tasks,
     get_task,
     create_tasks,
