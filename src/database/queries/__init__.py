@@ -10,30 +10,30 @@ from src.database.connections.db_models import (
 )
 from src.database.connections.db_setup import async_session_factory, async_engine, Base
 
-from src.models.task_models import (
+from src.schemas.task import (
     TaskBase,
     TaskSchema,
     UpdateTaskSchema,
     TaskEmployeeSchema,
 )
-from src.models.employee_models import (
+from src.schemas.employee import (
     EmployeeBase,
     EmployeeSchema,
     UpdateEmployeeSchema,
 )
-from src.models.project_models import (
+from src.schemas.project import (
     ProjectBase,
     ProjectSchema,
     UpdateProjectSchema,
 )
-from src.models.note_models import (
+from src.schemas.note import (
     NoteBase,
     NoteSchema,
     UpdateNoteSchema,
 )
 
 
-from src.models.relation_models import (
+from src.schemas.relations import (
     TaskRelSchema,
     EmployeeRelSchema,
     ProjectRelSchema,

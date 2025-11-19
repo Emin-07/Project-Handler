@@ -1,4 +1,15 @@
-.PHONY: run setup test demo
+.PHONY: requirements requirements-prod requirements-dev setup run test demo down
+
+requirements: requirements-prod requirements-dev
+	@echo "✅ All requirements files updated!"
+
+requirements-prod:
+	uv pip compile pyproject.toml -o requirements.txt
+	@echo "✅ Production requirements generated"
+
+requirements-dev:
+	uv pip compile pyproject.toml --extra dev -o requirements-dev.txt
+	@echo "✅ Development requirements generated"
 
 setup:
 	docker-compose up -d db
@@ -9,7 +20,7 @@ run:
 	docker-compose up --build
 
 test:
-	pytest -v
+	pytest
 
 demo:
 	@echo "Starting demo environment..."
@@ -17,3 +28,10 @@ demo:
 
 down:
 	docker-compose down
+
+clean:
+	@echo "Cleaning up..."
+	docker-compose down -v
+	rm -rf __pycache__
+	rm -rf .pytest_cache
+	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true

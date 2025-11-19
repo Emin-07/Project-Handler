@@ -4,7 +4,7 @@ from src.routers import employee, notes, projects, tasks
 import uvicorn
 from typing import List, Dict
 from src.database.queries.data_handler import get_global_data, reset_data
-from src.models import UnexpectedFileFormatExcpetion
+from src.schemas import UnexpectedFileFormatExcpetion
 
 app = FastAPI()
 

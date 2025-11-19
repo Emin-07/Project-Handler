@@ -332,26 +332,30 @@ dependencies = [
     { name = "h11" },
     { name = "httpx" },
     { name = "idna" },
-    { name = "mypy" },
-    { name = "mypy-extensions" },
-    { name = "pathspec" },
     { name = "psycopg" },
     { name = "psycopg2-binary" },
     { name = "pydantic" },
     { name = "pydantic-core" },
     { name = "pydantic-settings" },
-    { name = "pytest" },
-    { name = "pytest-asyncio" },
-    { name = "pytest-dotenv" },
     { name = "python-dotenv" },
     { name = "python-multipart" },
-    { name = "ruff" },
     { name = "sniffio" },
     { name = "sqlalchemy" },
     { name = "starlette" },
     { name = "typing-extensions" },
     { name = "typing-inspection" },
     { name = "uvicorn" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "mypy" },
+    { name = "mypy-extensions" },
+    { name = "pathspec" },
+    { name = "pytest" },
+    { name = "pytest-asyncio" },
+    { name = "pytest-dotenv" },
+    { name = "ruff" },
 ]
 
 [package.metadata]
@@ -367,20 +371,20 @@ requires-dist = [
     { name = "h11", specifier = "==0.16.0" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "idna", specifier = "==3.10" },
-    { name = "mypy", specifier = "==1.17.1" },
-    { name = "mypy-extensions", specifier = "==1.1.0" },
-    { name = "pathspec", specifier = "==0.12.1" },
-    { name = "psycopg", specifier = "==3.2.9" },
+    { name = "mypy", marker = "extra == 'dev'", specifier = "==1.17.1" },
+    { name = "mypy-extensions", marker = "extra == 'dev'", specifier = "==1.1.0" },
+    { name = "pathspec", marker = "extra == 'dev'", specifier = "==0.12.1" },
+    { name = "psycopg", specifier = ">=3.2.12" },
     { name = "psycopg2-binary", specifier = "==2.9.10" },
     { name = "pydantic", specifier = "==2.11.7" },
     { name = "pydantic-core", specifier = "==2.33.2" },
     { name = "pydantic-settings", specifier = "==2.10.1" },
-    { name = "pytest", specifier = ">=9.0.1" },
-    { name = "pytest-asyncio", specifier = ">=1.3.0" },
-    { name = "pytest-dotenv", specifier = ">=0.5.2" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.0.1" },
+    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = ">=1.3.0" },
+    { name = "pytest-dotenv", marker = "extra == 'dev'", specifier = ">=0.5.2" },
     { name = "python-dotenv", specifier = "==1.1.1" },
     { name = "python-multipart", specifier = "==0.0.20" },
-    { name = "ruff", specifier = "==0.12.11" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.12.11" },
     { name = "sniffio", specifier = "==1.3.1" },
     { name = "sqlalchemy", specifier = "==2.0.43" },
     { name = "starlette", specifier = "==0.47.2" },
@@ -388,17 +392,18 @@ requires-dist = [
     { name = "typing-inspection", specifier = "==0.4.1" },
     { name = "uvicorn", specifier = "==0.35.0" },
 ]
+provides-extras = ["dev"]
 
 [[package]]
 name = "psycopg"
-version = "3.2.9"
+version = "3.2.12"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/27/4a/93a6ab570a8d1a4ad171a1f4256e205ce48d828781312c0bbaff36380ecb/psycopg-3.2.9.tar.gz", hash = "sha256:2fbb46fcd17bc81f993f28c47f1ebea38d66ae97cc2dbc3cad73b37cefbff700", size = 158122, upload-time = "2025-05-13T16:11:15.533Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a8/77/c72d10262b872617e509a0c60445afcc4ce2cd5cd6bc1c97700246d69c85/psycopg-3.2.12.tar.gz", hash = "sha256:85c08d6f6e2a897b16280e0ff6406bef29b1327c045db06d21f364d7cd5da90b", size = 160642, upload-time = "2025-10-26T00:46:03.045Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/44/b0/a73c195a56eb6b92e937a5ca58521a5c3346fb233345adc80fd3e2f542e2/psycopg-3.2.9-py3-none-any.whl", hash = "sha256:01a8dadccdaac2123c916208c96e06631641c0566b22005493f09663c7a8d3b6", size = 202705, upload-time = "2025-05-13T16:06:26.584Z" },
+    { url = "https://files.pythonhosted.org/packages/c8/28/8c4f90e415411dc9c78d6ba10b549baa324659907c13f64bfe3779d4066c/psycopg-3.2.12-py3-none-any.whl", hash = "sha256:8a1611a2d4c16ae37eada46438be9029a35bb959bb50b3d0e1e93c0f3d54c9ee", size = 206765, upload-time = "2025-10-26T00:10:42.173Z" },
 ]
 
 [[package]]

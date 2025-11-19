@@ -2,7 +2,7 @@ import json
 import aiofiles
 from sqlalchemy.orm import Session
 
-from src.models import UnexpectedFileFormatExcpetion
+from src.schemas import UnexpectedFileFormatExcpetion
 from . import *
 
 default_data_path = "test_data.json"

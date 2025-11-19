@@ -2,11 +2,11 @@ from fastapi import APIRouter, Depends
 from typing import List
 
 
-from src.models.employee_models import (
+from src.schemas.employee import (
     EmployeeSchema,
 )
 
-from src.models.relation_models import EmployeeRelSchema
+from src.schemas.relations import EmployeeRelSchema
 
 from src.database.queries.employee_queries import (
     get_employees,
