@@ -1,4 +1,3 @@
-```markdown
 ![Python](https://img.shields.io/badge/Python-3.13+-blue.svg)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.116+-green.svg)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13+-blue.svg)
