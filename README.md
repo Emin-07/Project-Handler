@@ -146,31 +146,31 @@ pytest tests/ -v -k "test_function_name"
 ```
 project/
 ├── src/
-│   ├── routers/            # Роутеры и endpoints
-<!-- │   ├── core/          # Конфигурация, security, утилиты -->
-│   ├── database/           # Задачи относящиеся к базе данных
-│   │   ├── connections/    # SQLAlchemy модели БД, Конфиг БД и сетап БД
-│   │   ├── queries/        # Запросы написаны на SQLAlchemy ORM для взаимодейcтвия с БД
-│   ├── schemas/            # Pydantic схемы для валидации
-<!-- │   ├── services/      # Бизнес-логика -->
-│   └── tests/              # Тесты
-├── migrations/             # Alembic миграции
-├── README.md               # Readme для GitHub
-├── env.example             # Пример .env файла который поможет вам в настройке окружения
-├── test_data.json          # Дата для теста ручек
-├── user_data.json          # Дата для работы с ручками, данная юзером
-├── prestart.sh             # Файл который запускается в докерфайле, он обновляет миграции до Head
-├── main.py                 # Файл содержащий root endpointы, и связывающий routerы
-├── pytest.ini              # Настройки для pytest (тестинга)
-├── alembic.ini             # Настройки для alembic (миграции)
-├── uv.lock                 # Файл который следит за всеми зависимостями
-├── .gitignore              # Файл позволяющий игнорировать ненужные файлы при коммите
-├── docker-compose.yml      # Docker конфигурация
-├── Dockerfile              # Образ приложения
-├── pyproject.toml          # Зависимости UV
-├── requirements.txt        # Автогенерируемые зависимости
-├── requirements-dev.txt    # Автогенерируемые зависимости для dev
-└── Makefile                # Утилиты разработки
+│   ├── routers/         # Роутеры и endpoints
+<!-- │   ├── core/       # Конфигурация, security, утилиты -->
+│   ├── database/        # Задачи относящиеся к базе данных
+│   │   ├── connections/ # SQLAlchemy модели БД, Конфиг БД и сетап БД
+│   │   ├── queries/     # Запросы написаны на SQLAlchemy ORM для взаимодейcтвия с БД
+│   ├── schemas/         # Pydantic схемы для валидации
+<!-- │   ├── services/   # Бизнес-логика -->
+│   └── tests/           # Тесты
+├── migrations/          # Alembic миграции
+├── README.md            # Readme для GitHub
+├── env.example          # Пример .env файла который поможет вам в настройке окружения
+├── test_data.json       # Дата для теста ручек
+├── user_data.json       # Дата для работы с ручками, данная юзером
+├── prestart.sh          # Файл запускающийся в докерфайле, он обновляет миграции до Head
+├── main.py              # Файл содержащий root endpointы, и связывающий routerы
+├── pytest.ini           # Настройки для pytest (тестинга)
+├── alembic.ini          # Настройки для alembic (миграции)
+├── uv.lock              # Файл который следит за всеми зависимостями
+├── .gitignore           # Файл позволяющий игнорировать ненужные файлы при коммите
+├── docker-compose.yml   # Docker конфигурация
+├── Dockerfile           # Образ приложения
+├── pyproject.toml       # Зависимости UV
+├── requirements.txt     # Автогенерируемые зависимости
+├── requirements-dev.txt # Автогенерируемые зависимости для dev
+└── Makefile             # Утилиты разработки
 ```
 
 ## 🔧 Настройка окружения
