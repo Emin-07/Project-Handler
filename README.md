@@ -147,12 +147,10 @@ pytest tests/ -v -k "test_function_name"
 project/
 ├── src/
 │   ├── routers/         # Роутеры и endpoints
-<!-- │   ├── core/       # Конфигурация, security, утилиты -->
 │   ├── database/        # Задачи относящиеся к базе данных
 │   │   ├── connections/ # SQLAlchemy модели БД, Конфиг БД и сетап БД
 │   │   ├── queries/     # Запросы написаны на SQLAlchemy ORM для взаимодейcтвия с БД
 │   ├── schemas/         # Pydantic схемы для валидации
-<!-- │   ├── services/   # Бизнес-логика -->
 │   └── tests/           # Тесты
 ├── migrations/          # Alembic миграции
 ├── README.md            # Readme для GitHub
