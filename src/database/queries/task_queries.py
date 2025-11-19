@@ -13,7 +13,7 @@ async def get_tasks(
         .order_by(e.id)
     )
     tasks = res.all()
-    tasks_validated = [TaskSchema.model_validate(task) for task in tasks]
+    tasks_validated = [TaskSchema.model_validate(task.__dict__) for task in tasks]
     for task_validated in tasks_validated:
         print(task_validated)
     return tasks_validated
@@ -36,7 +36,7 @@ async def get_task(
             status_code=404,
             detail=f"There's no task with id {task_id}",
         )
-    res = TaskRelSchema.model_validate(task)
+    res = TaskRelSchema.model_validate(task.__dict__)
     print(res)
     return res
 
@@ -50,7 +50,7 @@ async def delete_tasks(
     for task_id in tasks_id:
         task = await session.get(Task, task_id)
         if task is not None:
-            deleted_task = TaskSchema.model_validate(task)
+            deleted_task = TaskSchema.model_validate(task.__dict__)
             await session.delete(task)
             await session.commit()
             deleted_tasks.append(deleted_task)
@@ -80,13 +80,15 @@ async def create_tasks(
     for task in mapped_tasks:
         await session.refresh(task)
 
-    tasks_validated = [TaskSchema.model_validate(task) for task in mapped_tasks]
+    tasks_validated = [
+        TaskSchema.model_validate(task.__dict__) for task in mapped_tasks
+    ]
     return tasks_validated
 
 
 async def update_task(
     update_id: int,
-    update_data: UpdateEmployeeSchema,
+    update_data: UpdateTaskSchema,
     request: Request,
     session: Annotated[AsyncSession, Depends(get_session)],
 ) -> TaskSchema:
@@ -106,11 +108,11 @@ async def update_task(
         if key != "priority":
             setattr(prev_task, key, val)
         else:
-            prev_task.priority = update_data.priority.name
+            prev_task.priority = update_data.priority
     await session.commit()
     await session.refresh(prev_task)
 
-    task_validated = TaskSchema.model_validate(prev_task)
+    task_validated = TaskSchema.model_validate(prev_task.__dict__)
     print(task_validated)
     return task_validated
 

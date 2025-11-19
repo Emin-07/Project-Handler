@@ -13,9 +13,11 @@ async def get_projects(
         .order_by(e.id)
     )
     projects = res.all()
-    validated_projects = [ProjectSchema.model_validate(project) for project in projects]
-    for project in validated_projects:
-        print(project)
+    validated_projects = [
+        ProjectSchema.model_validate(project.__dict__) for project in projects
+    ]
+    # for project in validated_projects:
+    #     print(project)
     return validated_projects
 
 
@@ -28,10 +30,9 @@ async def get_project(
     if project is None:
         raise HTTPException(
             status_code=404,
-            detail=f"There's no project with id {project_id}",
+            detail=f"There'    s no project with id {project_id}",
         )
-    res = ProjectRelSchema.model_validate(project)
-    print(res)
+    res = ProjectRelSchema.model_validate(project.__dict__)
     return res
 
 
@@ -44,7 +45,7 @@ async def delete_projects(
     for project_id in projects_id:
         project = await session.get(Project, project_id)
         if project is not None:
-            deleted_project = ProjectSchema.model_validate(project)
+            deleted_project = ProjectSchema.model_validate(project.__dict__)
             await session.delete(project)
             await session.commit()
             deleted_projects.append(deleted_project)
@@ -74,7 +75,7 @@ async def create_projects(
         await session.refresh(project)
 
     projects_validated = [
-        ProjectSchema.model_validate(project) for project in mapped_projects
+        ProjectSchema.model_validate(project.__dict__) for project in mapped_projects
     ]
 
     return projects_validated
@@ -103,8 +104,7 @@ async def update_project(
     await session.commit()
     await session.refresh(prev_project)
 
-    project_validated = ProjectSchema.model_validate(prev_project)
-    print(project_validated)
+    project_validated = ProjectSchema.model_validate(prev_project.__dict__)
     return project_validated
 
 

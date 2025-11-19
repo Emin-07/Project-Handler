@@ -15,7 +15,7 @@ async def get_employees(
     )
     employees = res.all()
     validated_employees = [
-        EmployeeSchema.model_validate(employee) for employee in employees
+        EmployeeSchema.model_validate(employee.__dict__) for employee in employees
     ]
     for employee in validated_employees:
         print(employee)
@@ -38,7 +38,7 @@ async def get_employee(
             status_code=418,
             detail=f"Sry you're a teapot, there's no user with id {employee_id}",
         )
-    res = EmployeeRelSchema.model_validate(employee)
+    res = EmployeeRelSchema.model_validate(employee.__dict__)
     print(res)
     return res
 
@@ -53,7 +53,7 @@ async def delete_employees(
     for employee_id in employees_id:
         employee = await session.get(Employee, employee_id)
         if employee is not None:
-            deleted_employee = EmployeeSchema.model_validate(employee)
+            deleted_employee = EmployeeSchema.model_validate(employee.__dict__)
             await session.delete(employee)
             await session.commit()
             deleted_employees.append(deleted_employee)
@@ -86,7 +86,8 @@ async def create_employees(
         await session.refresh(employee)
 
     employees_validated = [
-        EmployeeSchema.model_validate(employee) for employee in mapped_employees
+        EmployeeSchema.model_validate(employee.__dict__)
+        for employee in mapped_employees
     ]
 
     return employees_validated
@@ -116,7 +117,7 @@ async def update_employee(
     await session.commit()
     await session.refresh(prev_employee)
 
-    employee_validated = EmployeeSchema.model_validate(prev_employee)
+    employee_validated = EmployeeSchema.model_validate(prev_employee.__dict__)
     print(employee_validated)
     return employee_validated
 

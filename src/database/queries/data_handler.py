@@ -1,15 +1,8 @@
 import json
 import aiofiles
-<<<<<<< HEAD:database/queries/data_handler.py
-<<<<<<< HEAD:src/database/queries/data_handler.py
-from src.models import UnexpectedFileFormatExcpetion
-=======
-from models import UnexpectedFileFormatExcpetion
->>>>>>> parent of 0ed8f11 (улчушил dockerfilы, и нначал добавлять тесты понемногу):src/database/queries/data_handler.py
 from sqlalchemy.orm import Session
-=======
-from models import UnexpectedFileFormatExcpetion
->>>>>>> parent of 492047d (Docker с Docker-composeбыли добавлены + небольшие изменения):database/queries/data_handler.py
+
+from src.models import UnexpectedFileFormatExcpetion
 from . import *
 
 default_data_path = "test_data.json"
@@ -122,3 +115,56 @@ async def reset_data(session: Annotated[AsyncSession, Depends(get_session)]) -> 
     return active_data
 
     # return {"message": "Data resetted to default successfully", "data": active_data}
+
+
+"""
+
+SYNC versions
+
+"""
+
+
+def get_data_sync():
+    global active_data
+    global active_path
+
+    if active_data is None:
+        try:
+            active_path = default_data_path
+            with open(active_path) as f:
+                data = f.read()
+                active_data = json.loads(data)
+        except FileNotFoundError:
+            print("File was not found", active_path)
+    return active_data
+
+
+def add_data_into_db_sync(data: Dict[str, List], session: Session) -> None:
+    # async_engine.echo = False
+    session.add_all(
+        [
+            Project(**ProjectBase(**project).model_dump())
+            for project in data.get("projects", [])
+        ]
+    )
+    session.add_all(
+        [Task(**TaskBase(**task).model_dump()) for task in data.get("tasks", [])]
+    )
+    session.add_all(
+        [
+            Employee(**EmployeeBase(**employee).model_dump())
+            for employee in data.get("employees", [])
+        ]
+    )
+    session.flush()
+    session.add_all(
+        [Note(**NoteBase(**note).model_dump()) for note in data.get("notes", [])]
+    )
+    session.add_all(
+        [
+            TaskEmployees(**TaskEmployeeSchema(**tasks_employee).model_dump())
+            for tasks_employee in data.get("tasks_employees", [])
+        ]
+    )
+    session.commit()
+    # async_engine.echo = True

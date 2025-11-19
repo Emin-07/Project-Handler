@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional
 
 
@@ -9,8 +9,7 @@ class NoteBase(BaseModel):
     )
     task_id: int = Field(..., description="The ID of the task this note belongs to.")
 
-    class Config:
-        from_attributes = True
+    ConfigDict(from_attributes=True)
 
 
 class NoteSchema(NoteBase):

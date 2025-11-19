@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional
 from . import DateString
 
@@ -13,8 +13,7 @@ class ProjectBase(BaseModel):
     )
     is_completed: bool = Field(default=False, description="status of completion")
 
-    class Config:
-        from_attributes = True
+    ConfigDict(from_attributes=True)
 
 
 class ProjectSchema(ProjectBase):

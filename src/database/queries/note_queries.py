@@ -13,7 +13,7 @@ async def get_notes(
         .order_by(e.id)
     )
     notes = res.all()
-    validated_notes = [NoteSchema.model_validate(note) for note in notes]
+    validated_notes = [NoteSchema.model_validate(note.__dict__) for note in notes]
     for note in validated_notes:
         print(note)
     return validated_notes
@@ -35,7 +35,7 @@ async def get_note(
             status_code=404,
             detail=f"There's no note with id {note_id}",
         )
-    res = NoteRelSchema.model_validate(note)
+    res = NoteRelSchema.model_validate(note.__dict__)
     print(res)
     return res
 
@@ -49,7 +49,7 @@ async def delete_notes(
     for note_id in notes_id:
         note = await session.get(Note, note_id)
         if note is not None:
-            deleted_note = NoteSchema.model_validate(note)
+            deleted_note = NoteSchema.model_validate(note.__dict__)
             await session.delete(note)
             await session.commit()
             deleted_notes.append(deleted_note)
@@ -78,7 +78,9 @@ async def create_notes(
     for new_note in mapped_notes:
         await session.refresh(new_note)
 
-    notes_validated = [NoteSchema.model_validate(note) for note in mapped_notes]
+    notes_validated = [
+        NoteSchema.model_validate(note.__dict__) for note in mapped_notes
+    ]
 
     return notes_validated
 
@@ -105,7 +107,7 @@ async def update_note(
     await session.commit()
     await session.refresh(prev_note)
 
-    note_validated = NoteSchema.model_validate(prev_note)
+    note_validated = NoteSchema.model_validate(prev_note.__dict__)
     print(note_validated)
     return note_validated
 
