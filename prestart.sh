@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# set -e  # Exit on any error
+echo "Waiting for database to be ready..."
+sleep 5
 
 echo "Applying Alembic migrations..."
-
 uv run alembic upgrade head
 
 echo "Starting FastAPI server ..."

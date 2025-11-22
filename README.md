@@ -11,14 +11,29 @@
 
 Высокопроизводительное асинхронное бэкенд-приложение с современным стеком технологий и полным циклом разработки.
 
-## 🔥 Демо
+## 🖼️ Project Demo
 
-**Живое демо:** [https://your-project.onrender.com](https://your-project.onrender.com)
+### API Documentation
+![Swagger UI](images/project_database_schema.png)
+*Интерактивное API документация со всеми эндпоинтами*
 
-**Доступные эндпоинты:**
-- 📚 **Документация API:** [/docs](https://your-project.onrender.com/docs)
-- 🔍 **Альтернативная документация:** [/redoc](https://your-project.onrender.com/redoc)
-- 🏓 **Health Check:** [/health](https://your-project.onrender.com/health)
+### Database Schema
+![Database Diagram](images/database-schema.png)
+*PostgreSQL схема показывающиеся все связи*
+
+### Key Features
+![Feature 1](images/feature1.png) # авторизация
+![Feature 2](images/feature2.png) # показать как работают связи при вызове одного
+![Feature 3](images/feature3.png) # Возможность загружать собственные данные
+
+### 🚀 Quick Local Setup
+```bash
+git clone https://github.com/Emin-07/Project-Handler.git
+make run
+# App runs on http://localhost:8000
+# API docs: http://localhost:8000/docs 
+```
+
 
 ## 🛠 Технологический стек
 
@@ -251,236 +266,4 @@ make clean              # Очистка проекта
 
 **Russian** | [English](#-fastapi-asynchronous-backend-project)
 
-A high-performance asynchronous backend application with modern technology stack and full development cycle.
-
-## 🔥 Demo
-
-**Live Demo:** [https://your-project.onrender.com](https://your-project.onrender.com)
-
-**Available Endpoints:**
-- 📚 **API Documentation:** [/docs](https://your-project.onrender.com/docs)
-- 🔍 **Alternative Documentation:** [/redoc](https://your-project.onrender.com/redoc)
-- 🏓 **Health Check:** [/health](https://your-project.onrender.com/health)
-
-## 🛠 Technology Stack
-
-**Backend:**
-- **Python 3.13** - Main programming language
-- **FastAPI 0.116** - Modern asynchronous framework
-- **SQLAlchemy 2.0** - Asynchronous ORM
-- **Alembic** - Database migrations
-- **Pydantic & Pydantic Settings** - Validation and configuration
-- **Uvicorn** - ASGI server
-
-**Database:**
-- **PostgreSQL** - Main relational database
-- **AsyncPG** - Asynchronous PostgreSQL driver
-- **Psycopg2** - Additional database driver
-
-**Infrastructure:**
-- **Docker & Docker Compose** - Containerization and orchestration
-- **UV** - Modern dependency manager
-- **Pytest** - Testing framework
-- **HTTPX** - Asynchronous HTTP clients
-
-**Development Tools:**
-- **Ruff** - Blazing fast linter
-- **Mypy** - Static type checking
-- **Black** - Code formatting
-- **Pre-commit** - Git hooks
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Docker & Docker Compose
-- UV (recommended) or Python 3.13+
-
-### Running via Docker (Recommended)
-```bash
-# Clone repository
-git clone https://github.com/Emin-07/Project-Handler.git
-cd projectHandler
-
-# Start all services
-make run
-
-# FastAPI app will be available at http://localhost:8000
-# Adminer app will be available at http://localhost:8080
-# pgAdmin app will be available at http://localhost:5050
-```
-
-### Local Development with UV
-```bash
-# Install UV (if not installed)
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# Clone and setup
-git clone https://github.com/Emin-07/Project-Handler.git
-cd projectHandler
-
-# Install all dependencies
-uv sync --all-extras
-
-# Generate requirements files
-make requirements
-
-# Start development server
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
-```
-
-### Traditional Method (pip)
-```bash
-# Generate requirements.txt
-make requirements
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-pip install -r requirements-dev.txt
-
-# Start server
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-```
-
-## 📡 API Endpoints
-
-### Main endpoints:
-- `GET /health` - API health check
-- `GET /docs` - Interactive Swagger documentation
-- `GET /redoc` - Alternative documentation
-
-### API Features:
-- ✅ **Fully asynchronous operations**
-- ✅ **Auto-generated OpenAPI documentation**
-- ✅ **Data validation via Pydantic v2**
-- ✅ **JWT authentication**
-- ✅ **Pagination and filtering**
-- ✅ **Error handling and validation**
-
-## 🧪 Testing
-
-```bash
-# Run all tests
-make test
-
-# Run specific test
-pytest tests/ -v -k "test_function_name"
-```
-
-**Test Coverage:**
-- Unit tests
-- Database integration tests
-- API endpoint tests
-- Asynchronous tests (pytest-asyncio)
-
-## 🗄 Project Structure
-
-```
-project/
-├── src/
-│   ├── routers/         # Routers and endpoints
-│   ├── database/        # Database-related tasks
-│   │   ├── connections/ # SQLAlchemy DB models, DB config and setup
-│   │   ├── queries/     # SQLAlchemy ORM queries for DB interaction
-│   ├── schemas/         # Pydantic schemas for validation
-│   └── tests/           # Tests
-├── migrations/          # Alembic migrations
-├── README.md            # GitHub Readme
-├── env.example          # Example .env file for environment setup
-├── test_data.json       # Test data for endpoints
-├── user_data.json       # User-provided data for endpoints
-├── prestart.sh          # Dockerfile startup script that updates migrations to Head
-├── main.py              # File containing root endpoints and connecting routers
-├── pytest.ini           # Pytest configuration (testing)
-├── alembic.ini          # Alembic configuration (migrations)
-├── uv.lock              # Dependency tracking file
-├── .gitignore           # File for ignoring unnecessary files in commits
-├── docker-compose.yml   # Docker configuration
-├── Dockerfile           # Application image
-├── pyproject.toml       # UV dependencies
-├── requirements.txt     # Auto-generated dependencies
-├── requirements-dev.txt # Auto-generated dev dependencies
-└── Makefile             # Development utilities
-```
-
-## 🔧 Environment Setup
-
-Create `.env` file:
-
-```bash
-# Linux/Mac
-cp .env.example .env
-
-# Windows (Command Prompt)
-copy .env.example .env
-```
-
-```env
-DB_HOST=localhost
-DB_PORT=5433
-DB_USER=postgres
-DB_PASSWORD=postgres
-DB_NAME=project_handler
-```
-
-## 👨‍💻 Development
-
-### Dependency Management
-```bash
-# Add new dependency
-uv add package_name
-
-# Add dev dependency
-uv add --dev package_name
-
-# Update requirements files
-make requirements
-```
-
-### Database Migrations
-```bash
-# Create new migration
-alembic revision --autogenerate -m "description"
-
-# Apply migrations
-alembic upgrade head
-
-# Rollback migration
-alembic downgrade -1
-```
-
-### Code Quality
-```bash
-# Run linter and formatting
-ruff check .
-ruff format .
-
-# Type checking
-mypy app/
-```
-
-### Makefile Utilities
-```bash
-make requirements       # Download all dependencies, both dev and prod
-make requirements-prod  # Download prod dependencies
-make requirements-dev   # Download dev dependencies
-make run                # Run via Docker-compose
-make test               # Run tests
-make demo               # Demo environment
-make down               # Stop containers
-make clean              # Clean project
-```
-
-## 📈 Performance
-
-Thanks to the modern asynchronous stack:
-- **FastAPI** for high-performance requests
-- **AsyncPG** for asynchronous PostgreSQL access
-- **UV** for fast dependency installation
-- **Ruff** for instant linting
-- **Docker** for isolation and scaling
-
----
+...
