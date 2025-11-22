@@ -14,8 +14,6 @@ async def get_tasks(
     )
     tasks = res.all()
     tasks_validated = [TaskSchema.model_validate(task.__dict__) for task in tasks]
-    for task_validated in tasks_validated:
-        print(task_validated)
     return tasks_validated
 
 
@@ -36,8 +34,7 @@ async def get_task(
             status_code=404,
             detail=f"There's no task with id {task_id}",
         )
-    res = TaskRelSchema.model_validate(task.__dict__)
-    print(res)
+    res = TaskRelSchema.model_validate(task.__dict__, from_attributes=True)
     return res
 
 
@@ -113,7 +110,6 @@ async def update_task(
     await session.refresh(prev_task)
 
     task_validated = TaskSchema.model_validate(prev_task.__dict__)
-    print(task_validated)
     return task_validated
 
 

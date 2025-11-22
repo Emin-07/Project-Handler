@@ -16,8 +16,6 @@ async def get_projects(
     validated_projects = [
         ProjectSchema.model_validate(project.__dict__) for project in projects
     ]
-    # for project in validated_projects:
-    #     print(project)
     return validated_projects
 
 
@@ -32,7 +30,7 @@ async def get_project(
             status_code=404,
             detail=f"There'    s no project with id {project_id}",
         )
-    res = ProjectRelSchema.model_validate(project.__dict__)
+    res = ProjectRelSchema.model_validate(project.__dict__, from_attributes=True)
     return res
 
 
@@ -131,7 +129,6 @@ async def project_avg_salary(
     res = await session.execute(query)
     result = []
     for row in res:
-        print(row._asdict())
         result.append(row._asdict())
     return result
 

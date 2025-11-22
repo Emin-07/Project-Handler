@@ -14,8 +14,6 @@ async def get_notes(
     )
     notes = res.all()
     validated_notes = [NoteSchema.model_validate(note.__dict__) for note in notes]
-    for note in validated_notes:
-        print(note)
     return validated_notes
 
 
@@ -35,8 +33,7 @@ async def get_note(
             status_code=404,
             detail=f"There's no note with id {note_id}",
         )
-    res = NoteRelSchema.model_validate(note.__dict__)
-    print(res)
+    res = NoteRelSchema.model_validate(note.__dict__, from_attributes=True)
     return res
 
 
@@ -108,7 +105,6 @@ async def update_note(
     await session.refresh(prev_note)
 
     note_validated = NoteSchema.model_validate(prev_note.__dict__)
-    print(note_validated)
     return note_validated
 
 

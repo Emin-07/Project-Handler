@@ -17,8 +17,6 @@ async def get_employees(
     validated_employees = [
         EmployeeSchema.model_validate(employee.__dict__) for employee in employees
     ]
-    for employee in validated_employees:
-        print(employee)
     return validated_employees
 
 
@@ -38,8 +36,7 @@ async def get_employee(
             status_code=418,
             detail=f"Sry you're a teapot, there's no user with id {employee_id}",
         )
-    res = EmployeeRelSchema.model_validate(employee.__dict__)
-    print(res)
+    res = EmployeeRelSchema.model_validate(employee.__dict__, from_attributes=True)
     return res
 
 
@@ -118,7 +115,6 @@ async def update_employee(
     await session.refresh(prev_employee)
 
     employee_validated = EmployeeSchema.model_validate(prev_employee.__dict__)
-    print(employee_validated)
     return employee_validated
 
 

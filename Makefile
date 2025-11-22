@@ -11,11 +11,6 @@ requirements-dev:
 	uv pip compile pyproject.toml --extra dev -o requirements-dev.txt
 	@echo "✅ Development requirements generated"
 
-setup:
-	docker-compose up -d db
-	sleep 5
-	python -m alembic upgrade head
-
 run:
 	docker-compose up --build
 

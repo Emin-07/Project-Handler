@@ -1,11 +1,10 @@
-FROM python:3.13.8-trixie
+FROM python:3.13-trixie
 
 ENV PYHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
-
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
-
+RUN pip install uv && \
+    uv --version
 WORKDIR /app
 
 COPY pyproject.toml .
@@ -20,4 +19,3 @@ RUN chmod +x prestart.sh
 
 ENTRYPOINT [ "/app/prestart.sh" ]
 
-CMD ["uv", "run", "python", "main.py"]

@@ -44,5 +44,5 @@ async def fileformat_exception_handler(
     )
 
 
-if __name__ == "__main__":
-    uvicorn.run(app="main:app", reload=True)
+# if __name__ == "__main__":
+#     uvicorn.run(app="main:app", reload=True)
