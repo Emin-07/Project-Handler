@@ -14,11 +14,11 @@
 ## 🖼️ Project Demo
 
 ### API Documentation
-![Swagger UI](images/project_database_schema.png)
+![Swagger UI](images/swagger.png)
 *Интерактивное API документация со всеми эндпоинтами*
 
 ### Database Schema
-![Database Diagram](images/database-schema.png)
+![Database Diagram](images/project_database_schema.png)
 *PostgreSQL схема показывающиеся все связи*
 
 ### Key Features
@@ -265,5 +265,3 @@ make clean              # Очистка проекта
 # 🚀 FastAPI Asynchronous Backend Project
 
 **Russian** | [English](#-fastapi-asynchronous-backend-project)
-
-...
