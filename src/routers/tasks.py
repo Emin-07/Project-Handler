@@ -4,7 +4,7 @@ from typing import List
 from src.schemas.task import TaskSchema
 from src.schemas.relations import TaskRelSchema
 
-from src.database.queries.task_queries import (
+from src.database.queries.task import (
     get_tasks,
     get_task,
     create_tasks,

@@ -8,7 +8,7 @@ from src.schemas.project import (
 from src.schemas.relations import ProjectRelSchema
 
 
-from src.database.queries.project_queries import (
+from src.database.queries.project import (
     get_projects,
     get_project,
     create_projects,

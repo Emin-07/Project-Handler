@@ -8,7 +8,7 @@ from src.schemas.employee import (
 
 from src.schemas.relations import EmployeeRelSchema
 
-from src.database.queries.employee_queries import (
+from src.database.queries.employee import (
     get_employees,
     get_employee,
     create_employees,

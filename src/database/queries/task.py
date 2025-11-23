@@ -34,7 +34,7 @@ async def get_task(
             status_code=404,
             detail=f"There's no task with id {task_id}",
         )
-    res = TaskRelSchema.model_validate(task.__dict__, from_attributes=True)
+    res = TaskRelSchema.model_validate(task.__dict__)
     return res
 
 

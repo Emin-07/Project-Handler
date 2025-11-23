@@ -33,7 +33,7 @@ async def get_note(
             status_code=404,
             detail=f"There's no note with id {note_id}",
         )
-    res = NoteRelSchema.model_validate(note.__dict__, from_attributes=True)
+    res = NoteRelSchema.model_validate(note.__dict__)
     return res
 
 

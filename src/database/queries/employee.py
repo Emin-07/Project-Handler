@@ -36,7 +36,7 @@ async def get_employee(
             status_code=418,
             detail=f"Sry you're a teapot, there's no user with id {employee_id}",
         )
-    res = EmployeeRelSchema.model_validate(employee.__dict__, from_attributes=True)
+    res = EmployeeRelSchema.model_validate(employee.__dict__)
     return res
 
 

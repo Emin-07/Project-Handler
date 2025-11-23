@@ -16,7 +16,7 @@ class TaskBase(BaseModel):
     )
     project_id: int = Field(..., description="Project id that this task belongs to")
 
-    ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True)
 
 
 class TaskSchema(TaskBase):
@@ -28,6 +28,8 @@ class TaskEmployeeSchema(BaseModel):
     employee_id: int = Field(
         ..., gt=0, description="ID of the employee that works on the task"
     )
+
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UpdateTaskSchema(BaseModel):

@@ -30,7 +30,7 @@ async def get_project(
             status_code=404,
             detail=f"There'    s no project with id {project_id}",
         )
-    res = ProjectRelSchema.model_validate(project.__dict__, from_attributes=True)
+    res = ProjectRelSchema.model_validate(project.__dict__)
     return res
 
 

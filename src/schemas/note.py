@@ -9,7 +9,7 @@ class NoteBase(BaseModel):
     )
     task_id: int = Field(..., description="The ID of the task this note belongs to.")
 
-    ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True)
 
 
 class NoteSchema(NoteBase):

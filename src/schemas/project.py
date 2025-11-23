@@ -13,7 +13,7 @@ class ProjectBase(BaseModel):
     )
     is_completed: bool = Field(default=False, description="status of completion")
 
-    ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True)
 
 
 class ProjectSchema(ProjectBase):

@@ -14,7 +14,7 @@
 ## 🖼️ Project Demo
 
 ### API Documentation
-![Swagger UI](images/swagger.png)
+![Swagger UI](images/swagger_ui.png)
 *Интерактивное API документация со всеми эндпоинтами*
 
 ### Database Schema
@@ -23,7 +23,7 @@
 
 ### Key Features
 ![Feature 1](images/feature1.png) # авторизация
-![Feature 2](images/feature2.png) # показать как работают связи при вызове одного
+![Feature 2](images/response_schema.png) # показать как работают связи при вызове одного
 ![Feature 3](images/feature3.png) # Возможность загружать собственные данные
 
 ### 🚀 Quick Local Setup
@@ -32,6 +32,8 @@ git clone https://github.com/Emin-07/Project-Handler.git
 make run
 # App runs on http://localhost:8000
 # API docs: http://localhost:8000/docs 
+# API alternative docs: http://localhost:8000/redoc 
+
 ```
 
 

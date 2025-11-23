@@ -11,7 +11,7 @@ class EmployeeBase(BaseModel):
         default=True, description="Status of Employee if he's working"
     )
 
-    ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True)
 
 
 class EmployeeSchema(EmployeeBase):

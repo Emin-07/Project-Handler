@@ -6,7 +6,7 @@ from src.schemas.note import NoteSchema
 from src.schemas.relations import NoteRelSchema
 
 
-from src.database.queries.note_queries import (
+from src.database.queries.note import (
     get_notes,
     get_note,
     create_notes,
