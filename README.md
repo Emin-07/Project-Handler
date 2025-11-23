@@ -22,9 +22,9 @@
 *PostgreSQL схема показывающиеся все связи*
 
 ### Key Features
-![Feature 1](images/feature1.png) # авторизация
-![Feature 2](images/response_schema.png) # показать как работают связи при вызове одного
-![Feature 3](images/feature3.png) # Возможность загружать собственные данные
+![Feature 1](images/feature1.png) # авторизация (This feature is in the process)
+![Feature 2](images/response_schema.png) response schema 'get task' с one2many и one2one связями
+![Feature 3](images/data_uploaded_by_user.png) # Возможность загружать собственные данные
 
 ### 🚀 Quick Local Setup
 ```bash
@@ -165,7 +165,8 @@ project/
 │   │   ├── queries/     # Запросы написаны на SQLAlchemy ORM для взаимодейcтвия с БД
 │   ├── schemas/         # Pydantic схемы для валидации
 │   └── tests/           # Тесты
-├── migrations/          # Alembic миграции
+├── alembic/             # Alembic миграции
+├── images/              # Фото использованные для readme
 ├── README.md            # Readme для GitHub
 ├── env.example          # Пример .env файла который поможет вам в настройке окружения
 ├── test_data.json       # Дата для теста ручек
