@@ -1,3 +1,4 @@
+# ruff: noqa
 from . import *
 
 
@@ -31,7 +32,7 @@ async def get_task(
     )
     if task is None:
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=f"There's no task with id {task_id}",
         )
     res = TaskRelSchema.model_validate(task.__dict__)
@@ -53,7 +54,8 @@ async def delete_tasks(
             deleted_tasks.append(deleted_task)
         else:
             raise HTTPException(
-                status_code=404, detail=f"Task with id:{task_id} not found!"
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Task with id:{task_id} not found!",
             )
     return deleted_tasks
 
@@ -92,7 +94,7 @@ async def update_task(
     prev_task = await session.get(Task, update_id)
     if prev_task is None:
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Task with id:{update_id} not found",
         )
 

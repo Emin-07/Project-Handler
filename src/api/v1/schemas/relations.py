@@ -1,9 +1,9 @@
 from typing import List
 
-from src.schemas.employee import EmployeeSchema
-from src.schemas.project import ProjectSchema
-from src.schemas.note import NoteSchema
-from src.schemas.task import TaskSchema
+from .employee import EmployeeSchema
+from .project import ProjectSchema
+from .note import NoteSchema
+from .task import TaskSchema
 
 
 class EmployeeRelSchema(EmployeeSchema):

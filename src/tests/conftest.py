@@ -1,6 +1,6 @@
 import pytest
 import pytest_asyncio
-from src.database.queries.data_handler import reset_data
+from src.database.queries.data_helper import reset_data
 from src.database.connections.db_setup import async_session_factory
 import json
 from main import app

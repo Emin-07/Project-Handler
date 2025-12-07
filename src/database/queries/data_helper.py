@@ -1,8 +1,9 @@
+# ruff: noqa
 import json
 import aiofiles
 from sqlalchemy.orm import Session
 
-from src.schemas import UnexpectedFileFormatExcpetion
+from src.api.v1.schemas import UnexpectedFileFormatExcpetion
 from . import *
 
 default_data_path = "test_data.json"
@@ -45,6 +46,12 @@ async def add_data_into_db(data: Dict[str, List], session: AsyncSession) -> None
         await session.flush()
     if "notes" in data:
         session.add_all([Note(**note) for note in data.get("notes", [])])
+
+    if "user_password" in data:
+        session.add_all(
+            [UserPassword(**user_pwd) for user_pwd in data.get("user_password", [])]
+        )
+
     await session.commit()
 
 
@@ -145,74 +152,6 @@ def get_data_sync():
     return active_data
 
 
-# def add_data_into_db_sync(data: Dict[str, List], session: Session) -> None:
-#     if "projects" in data:
-#         session.add_all([Project(**project) for project in data.get("projects", [])])
-#         session.flush()
-#     if "employees" in data:
-#         session.add_all(
-#             [Employee(**employee) for employee in data.get("employees", [])]
-#         )
-#         session.flush()
-#     if "tasks" in data:
-#         session.add_all([Task(**task) for task in data.get("tasks", [])])
-#         session.flush()
-#     if "tasks_employees" in data:
-#         session.add_all(
-#             [
-#                 TaskEmployees(**tasks_employee)
-#                 for tasks_employee in data.get("tasks_employees", [])
-#             ]
-#         )
-#         session.flush()
-#     if "notes" in data:
-#         session.add_all([Note(**note) for note in data.get("notes", [])])
-#         session.commit()
-
-
-# def add_data_into_db_sync(data: Dict[str, List], session: Session) -> None:
-#     try:
-#         # 1. Проекты
-#         if "projects" in data:
-#             for project_data in data["projects"]:
-#                 project = Project(**project_data)
-#                 session.add(project)
-#             session.flush()
-
-#         # 2. Сотрудники
-#         if "employees" in data:
-#             for employee_data in data["employees"]:
-#                 employee = Employee(**employee_data)
-#                 session.add(employee)
-#             session.flush()
-
-#         # 3. Задачи
-#         if "tasks" in data:
-#             for task_data in data["tasks"]:
-#                 task = Task(**task_data)
-#                 session.add(task)
-#             session.flush()
-
-#         # 4. Связи
-#         if "tasks_employees" in data:
-#             for relation_data in data["tasks_employees"]:
-#                 relation = TaskEmployees(**relation_data)
-#                 session.add(relation)
-
-#         # 5. Заметки
-#         if "notes" in data:
-#             for note_data in data["notes"]:
-#                 note = Note(**note_data)
-#                 session.add(note)
-
-#         session.commit()
-
-#     except Exception as e:
-#         session.rollback()
-#         print(f"ERROR: {e}")
-#         raise
-
-
 def add_data_into_db_sync(data: Dict[str, List], session: Session) -> None:
     try:
         project_id_mapping = {}
@@ -227,7 +166,7 @@ def add_data_into_db_sync(data: Dict[str, List], session: Session) -> None:
             # Получаем созданные ID проектов
             projects = session.query(Project).all()
             project_id_mapping = {i + 1: p.id for i, p in enumerate(projects)}
-            print(f"DEBUG: Project IDs: {[p.id for p in projects]}")
+            # print(f"DEBUG: Project IDs: {[p.id for p in projects]}")
 
         # 2. Сотрудники
         if "employees" in data:
@@ -237,7 +176,7 @@ def add_data_into_db_sync(data: Dict[str, List], session: Session) -> None:
             # Получаем созданные ID сотрудников
             employees = session.query(Employee).all()
             employee_id_mapping = {i + 1: e.id for i, e in enumerate(employees)}
-            print(f"DEBUG: Employee IDs: {[e.id for e in employees]}")
+            # print(f"DEBUG: Employee IDs: {[e.id for e in employees]}")
 
         # 3. Задачи - исправляем project_id
         if "tasks" in data:
@@ -259,7 +198,7 @@ def add_data_into_db_sync(data: Dict[str, List], session: Session) -> None:
             # Получаем созданные ID задач
             tasks = session.query(Task).all()
             task_id_mapping = {i + 1: t.id for i, t in enumerate(tasks)}
-            print(f"DEBUG: Task IDs: {[t.id for t in tasks]}")
+            # print(f"DEBUG: Task IDs: {[t.id for t in tasks]}")
 
         # 4. Связи многие-ко-многим - исправляем task_id и employee_id
         if "tasks_employees" in data:
@@ -307,8 +246,22 @@ def add_data_into_db_sync(data: Dict[str, List], session: Session) -> None:
 
             session.bulk_insert_mappings(Note, fixed_notes)  # type: ignore
 
+        if "user_password" in data:
+            fixed_relations = []
+            for relation in data["user_password"]:
+                expected_employee_id = relation["user_id"]
+                actual_employee_id = employee_id_mapping.get(expected_employee_id)
+
+                if actual_employee_id is None:
+                    print(f"WARNING: No employee found for ID {expected_employee_id}")
+                    continue
+
+                relation["employee_id"] = actual_employee_id
+                fixed_relations.append(relation)
+            session.bulk_insert_mappings(UserPassword, fixed_relations)  # type: ignore
+
         session.commit()
-        print("DEBUG: Data insertion completed successfully")
+        # print("DEBUG: Data insertion completed successfully")
 
     except Exception as e:
         session.rollback()

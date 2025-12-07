@@ -15,14 +15,20 @@ anyio==4.10.0
     #   starlette
 asyncpg==0.30.0
     # via projecthandler (pyproject.toml)
+bcrypt==5.0.0
+    # via projecthandler (pyproject.toml)
 certifi==2025.11.12
     # via
     #   httpcore
     #   httpx
+cffi==2.0.0
+    # via cryptography
 click==8.2.1
     # via
     #   projecthandler (pyproject.toml)
     #   uvicorn
+cryptography==46.0.3
+    # via pyjwt
 fastapi==0.116.1
     # via projecthandler (pyproject.toml)
 greenlet==3.2.4
@@ -49,6 +55,8 @@ psycopg==3.2.12
     # via projecthandler (pyproject.toml)
 psycopg2-binary==2.9.10
     # via projecthandler (pyproject.toml)
+pycparser==2.23
+    # via cffi
 pydantic==2.11.7
     # via
     #   projecthandler (pyproject.toml)
@@ -59,6 +67,8 @@ pydantic-core==2.33.2
     #   projecthandler (pyproject.toml)
     #   pydantic
 pydantic-settings==2.10.1
+    # via projecthandler (pyproject.toml)
+pyjwt==2.10.1
     # via projecthandler (pyproject.toml)
 python-dotenv==1.1.1
     # via

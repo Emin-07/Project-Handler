@@ -1,3 +1,4 @@
+# ruff: noqa
 from . import *
 
 
@@ -30,7 +31,7 @@ async def get_note(
     )
     if note is None:
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=f"There's no note with id {note_id}",
         )
     res = NoteRelSchema.model_validate(note.__dict__)
@@ -52,7 +53,8 @@ async def delete_notes(
             deleted_notes.append(deleted_note)
         else:
             raise HTTPException(
-                status_code=404, detail=f"Note with id:{note_id} not found!"
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Note with id:{note_id} not found!",
             )
     return deleted_notes
 
@@ -91,7 +93,8 @@ async def update_note(
     prev_note = await session.get(Note, update_id)
     if prev_note is None:
         raise HTTPException(
-            status_code=404, detail=f"Note with id:{update_id} not found"
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Note with id:{update_id} not found",
         )
     if request.method == "PATCH":
         update_dict = update_data.model_dump(exclude_unset=True)

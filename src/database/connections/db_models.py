@@ -63,6 +63,10 @@ class Employee(Base):
         back_populates="written_by", cascade="all, delete-orphan", passive_deletes=True
     )
 
+    user_password: Mapped["UserPassword"] = relationship(
+        back_populates="employee", cascade="all, delete-orphan", uselist=False
+    )
+
 
 class TaskEmployees(Base):
     __tablename__ = "tasks_employees"
@@ -104,3 +108,14 @@ class Note(Base):
 
     written_by: Mapped["Employee"] = relationship(back_populates="employee_notes")
     note_task: Mapped["Task"] = relationship(back_populates="task_notes")
+
+
+class UserPassword(Base):
+    __tablename__ = "user_password"
+
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("employees.id", ondelete="CASCADE"), primary_key=True
+    )
+    hashed_password: Mapped[str]
+
+    employee: Mapped["Employee"] = relationship(back_populates="user_password")

@@ -7,40 +7,40 @@ from src.database.connections.db_models import (
     Employee,
     Project,
     TaskEmployees,
+    UserPassword,
 )
 from src.database.connections.db_setup import async_session_factory, async_engine, Base
-
-from src.schemas.task import (
+from src.api.v1.auth.utils import hash_password
+from src.api.v1.schemas.task import (
     TaskBase,
     TaskSchema,
     UpdateTaskSchema,
     TaskEmployeeSchema,
 )
-from src.schemas.employee import (
+from src.api.v1.schemas.employee import (
     EmployeeBase,
     EmployeeSchema,
     UpdateEmployeeSchema,
 )
-from src.schemas.project import (
+from src.api.v1.schemas.project import (
     ProjectBase,
     ProjectSchema,
     UpdateProjectSchema,
 )
-from src.schemas.note import (
+from src.api.v1.schemas.note import (
     NoteBase,
     NoteSchema,
     UpdateNoteSchema,
 )
 
-
-from src.schemas.relations import (
+from src.api.v1.schemas.relations import (
     TaskRelSchema,
     EmployeeRelSchema,
     ProjectRelSchema,
     NoteRelSchema,
 )
 from typing import List, Any, Dict, Annotated
-from fastapi import HTTPException, Depends, Request, UploadFile
+from fastapi import HTTPException, Depends, Request, UploadFile, status
 import asyncio
 from pydantic import Field, BaseModel
 
@@ -77,6 +77,7 @@ __all__ = [
     "UpdateTaskSchema",
     "UpdateEmployeeSchema",
     "UpdateNoteSchema",
+    "TaskEmployeeSchema",
     # SQLAlchemy
     "select",
     "func",
@@ -91,7 +92,7 @@ __all__ = [
     "Employee",
     "Project",
     "TaskEmployees",
-    "TaskEmployeeSchema",
+    "UserPassword",
     # Database
     "async_session_factory",
     "async_engine",
@@ -103,10 +104,12 @@ __all__ = [
     "HTTPException",
     "UploadFile",
     "Request",
+    "status",
     "Depends",
     "asyncio",
     "Annotated",
     # My func's
     "get_session",
     "PaginationDep_get",
+    "hash_password",
 ]

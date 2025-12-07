@@ -1,4 +1,50 @@
+# ruff: noqa
 from . import *
+
+
+async def get_all_users(
+    session: Annotated[AsyncSession, Depends(get_session)],
+) -> List[EmployeeSchema]:
+    e = aliased(Employee)
+
+    res = await session.scalars(select(e).order_by(e.id))
+    employees = res.all()
+    validated_employees = [
+        EmployeeSchema.model_validate(employee.__dict__) for employee in employees
+    ]
+    return validated_employees
+
+
+async def sign_in_by_id(
+    user_id: int,
+    password: str,
+    session: Annotated[AsyncSession, Depends(get_session)],
+) -> dict:
+    employee = await session.get(Employee, user_id)
+    res = await session.scalars(select(UserPassword.user_id))
+    logged_ids = res.all()
+    if employee is None or user_id in logged_ids:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Employee with id: {user_id} not found, {logged_ids}, {employee}",
+        )
+    hashed_pwd = hash_password(password)
+    hexed_and_hashed_pwd = hashed_pwd.hex()
+    session.add(UserPassword(user_id=user_id, hashed_password=hexed_and_hashed_pwd))
+    await session.commit()
+    return dict({"user": employee, "password": password})
+
+
+async def get_user_pwd(
+    employee_id: int, session: Annotated[AsyncSession, Depends(get_session)]
+):
+    pwd = await session.scalars(
+        select(UserPassword.hashed_password).where(UserPassword.user_id == employee_id)
+    )
+    res = ""
+    for letter in pwd:
+        res += letter
+    return res
 
 
 async def get_employees(
@@ -33,8 +79,8 @@ async def get_employee(
     )
     if employee is None:
         raise HTTPException(
-            status_code=418,
-            detail=f"Sry you're a teapot, there's no user with id {employee_id}",
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"User with id {employee_id} not found",
         )
     res = EmployeeRelSchema.model_validate(employee.__dict__)
     return res
@@ -56,7 +102,8 @@ async def delete_employees(
             deleted_employees.append(deleted_employee)
         else:
             raise HTTPException(
-                status_code=404, detail=f"Employee with id:{employee_id} not found!"
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Employee with id:{employee_id} not found!",
             )
     return deleted_employees
 
@@ -99,7 +146,7 @@ async def update_employee(
     prev_employee = await session.get(Employee, update_id)
     if prev_employee is None:
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Employee with id:{update_id} not found",
         )
 

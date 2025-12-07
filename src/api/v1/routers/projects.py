@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends
 from typing import List, Dict, Any, Annotated
 
-from src.schemas.project import (
+from src.api.v1.schemas.project import (
     ProjectSchema,
 )
 
-from src.schemas.relations import ProjectRelSchema
+from src.api.v1.schemas.relations import ProjectRelSchema
 
 
 from src.database.queries.project import (

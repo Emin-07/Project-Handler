@@ -2,11 +2,11 @@ from fastapi import APIRouter, Depends
 from typing import List
 
 
-from src.schemas.employee import (
+from src.api.v1.schemas.employee import (
     EmployeeSchema,
 )
 
-from src.schemas.relations import EmployeeRelSchema
+from src.api.v1.schemas.relations import EmployeeRelSchema
 
 from src.database.queries.employee import (
     get_employees,
@@ -14,6 +14,7 @@ from src.database.queries.employee import (
     create_employees,
     delete_employees,
     update_employee,
+    sign_in_by_id,
 )
 
 
@@ -60,3 +61,8 @@ async def update_employee_handle(
     updated_employee: EmployeeSchema = Depends(update_employee),
 ) -> EmployeeSchema:
     return updated_employee
+
+
+@router.post("/sign-in-employee/")
+async def sign_in_employee(creds=Depends(sign_in_by_id)):
+    return creds

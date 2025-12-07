@@ -1,9 +1,13 @@
 import enum
-from pydantic import BeforeValidator
+from pathlib import Path
+from pydantic import BeforeValidator, BaseModel, Field
 from datetime import datetime
 from typing import Annotated
 
 import re
+
+# Base dir is src
+BASE_DIR = Path(__file__).parent.parent.parent.parent
 
 DateString = Annotated[str, BeforeValidator(lambda x: validate_date_format(x))]
 
@@ -32,3 +36,11 @@ class Priority(enum.IntEnum):
 class UnexpectedFileFormatExcpetion(Exception):
     def __init__(self, filetype: str) -> None:
         self.filetype = filetype
+
+
+class AuthJWT(BaseModel):
+    private_key_path: Path = BASE_DIR / "certs" / "jwt-private.pem"
+    public_key_path: Path = BASE_DIR / "certs" / "jwt-public.pem"
+    algorithm: str = "RS256"
+    access_token_expire_minutes: int = 15
+    # access_token_expire_minutes: int = 2

@@ -1,3 +1,4 @@
+# ruff: noqa
 from . import *
 
 
@@ -27,7 +28,7 @@ async def get_project(
     )
     if project is None:
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=f"There'    s no project with id {project_id}",
         )
     res = ProjectRelSchema.model_validate(project.__dict__)
@@ -49,7 +50,8 @@ async def delete_projects(
             deleted_projects.append(deleted_project)
         else:
             raise HTTPException(
-                status_code=404, detail=f"Project with id:{project_id} not found!"
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Project with id:{project_id} not found!",
             )
     return deleted_projects
 
@@ -88,7 +90,7 @@ async def update_project(
     prev_project = await session.get(Project, update_id)
     if prev_project is None:
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Project with id:{update_id} not found",
         )
     if request.method == "PATCH":
