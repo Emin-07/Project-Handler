@@ -14,17 +14,17 @@
 ## 🖼️ Project Demo
 
 ### API Documentation
-![Swagger UI](images/swagger_ui.png)
+![Swagger UI](images_for_readme/swagger_ui.png)
 *Интерактивное API документация со всеми эндпоинтами*
 
 ### Database Schema
-![Database Diagram](images/project_database_schema.png)
+![Database Diagram](images_for_readme/project_database_schema.png)
 *PostgreSQL схема показывающиеся все связи*
 
 ### Key Features
-![Feature 1](images/feature1.png) # авторизация (This feature is in the process)
-![Feature 2](images/response_schema.png) response schema 'get task' с one2many и one2one связями
-![Feature 3](images/data_uploaded_by_user.png) # Возможность загружать собственные данные
+![Feature 1](images_for_readme/feature1.png) # авторизация (This feature is in the process)
+![Feature 2](images_for_readme/response_schema.png) response schema 'get task' с one2many и one2one связями
+![Feature 3](images_for_readme/data_uploaded_by_user.png) # Возможность загружать собственные данные
 
 ### 🚀 Quick Local Setup
 ```bash
@@ -166,7 +166,7 @@ project/
 │   ├── schemas/         # Pydantic схемы для валидации
 │   └── tests/           # Тесты
 ├── alembic/             # Alembic миграции
-├── images/              # Фото использованные для readme
+├── images_for_readme/              # Фото использованные для readme
 ├── README.md            # Readme для GitHub
 ├── env.example          # Пример .env файла который поможет вам в настройке окружения
 ├── test_data.json       # Дата для теста ручек
@@ -274,17 +274,17 @@ High-performance asynchronous backend application with a modern technology stack
 ## 🖼️ Project Demo
 
 ### API Documentation
-![Swagger UI](images/swagger_ui.png)
+![Swagger UI](images_for_readme/swagger_ui.png)
 *Interactive API documentation with all endpoints*
 
 ### Database Schema
-![Database Diagram](images/project_database_schema.png)
+![Database Diagram](images_for_readme/project_database_schema.png)
 *PostgreSQL schema showing all relationships*
 
 ### Key Features
-![Feature 1](images/feature1.png) # Authorization (This feature is in progress)
-![Feature 2](images/response_schema.png) Response schema for 'get task' with one2many and one2one relationships
-![Feature 3](images/data_uploaded_by_user.png) # Ability to upload custom data
+![Feature 1](images_for_readme/feature1.png) # Authorization (This feature is in progress)
+![Feature 2](images_for_readme/response_schema.png) Response schema for 'get task' with one2many and one2one relationships
+![Feature 3](images_for_readme/data_uploaded_by_user.png) # Ability to upload custom data
 
 ### 🚀 Quick Local Setup
 ```bash
@@ -421,7 +421,7 @@ project/
 │   ├── schemas/         # Pydantic schemas for validation
 │   └── tests/           # Tests
 ├── alembic/             # Alembic migrations
-├── images/              # Images used for readme
+├── images_for_readme/              # Images_for_readme used for readme
 ├── README.md            # GitHub Readme
 ├── env.example          # Example .env file to help with environment setup
 ├── test_data.json       # Test data for endpoints

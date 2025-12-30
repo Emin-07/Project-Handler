@@ -11,7 +11,7 @@ from typing import Sequence, Union
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-from src.database.queries.data_helper import get_data_sync, add_data_into_db_sync
+from src.database.services.data_helper import get_data_sync, add_data_into_db_sync
 from sqlalchemy.orm import Session
 # from sqlalchemy import table, column, String, Integer
 

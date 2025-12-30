@@ -1,14 +1,22 @@
-from fastapi import FastAPI, Depends, Request
-from fastapi.responses import JSONResponse
-import uvicorn
 from typing import Dict
-from src.database.queries.data_helper import get_global_data, reset_data
-from src.api.v1.schemas import UnexpectedFileFormatExcpetion
-from src.api.v1_group import router
+
+import uvicorn
+from fastapi import Depends, FastAPI, Request
+from fastapi.responses import JSONResponse
+
+from employee.routes.employee import router as employee_router
+from note.routes.note import router as note_router
+from project.routes.project import router as project_router
+from relation.schemas import UnexpectedFileFormatExcpetion
+from relation.services.data_helper import get_global_data, reset_data
+from task.routes.task import router as task_router
 
 app = FastAPI()
 
-app.include_router(router)
+app.include_router(note_router)
+app.include_router(employee_router)
+app.include_router(project_router)
+app.include_router(task_router)
 
 
 def data_is_valid(data: dict) -> bool:

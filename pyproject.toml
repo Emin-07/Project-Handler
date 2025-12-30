@@ -63,16 +63,6 @@ dev = [
 ]
 
 
-[tool.ruff]
-# Explicitly enable per-file-ignores
-line-length = 88
-select = ["E", "F", "W", "I", "N"]
-
-extend-per-file-ignores = [
-    { path = "routers/db_conn/queries_package/__init__.py", codes = ["F401", "F403", "F405"] },
-    { path = "routers/db_conn/queries_package/**/*.py", codes = ["F401", "F405"] }
-]
-
 [tool.mypy]
 python_version = "3.13"
 [[tool.mypy.overrides]]
