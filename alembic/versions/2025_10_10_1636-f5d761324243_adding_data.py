@@ -8,11 +8,11 @@ Create Date: 2025-10-10 16:36:11.403997
 
 from typing import Sequence, Union
 
-from alembic import op
-import sqlalchemy as sa
-from sqlalchemy.dialects import postgresql
-from src.database.services.data_helper import get_data_sync, add_data_into_db_sync
 from sqlalchemy.orm import Session
+
+from alembic import op
+from relation.services.data_helper import add_data_into_db_sync, get_data_sync
+
 # from sqlalchemy import table, column, String, Integer
 
 # revision identifiers, used by Alembic.

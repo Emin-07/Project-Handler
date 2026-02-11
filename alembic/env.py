@@ -4,11 +4,13 @@ from logging.config import fileConfig
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
-from src.database.core.db_config import settings
-from src.database.core.db_models import Task  # noqa
-from src.database.core.db_setup import Base
-from alembic import context
 
+from alembic import context
+from core.config import settings
+from core.models import Employee
+from core.setup import Base
+
+employee = Employee
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
