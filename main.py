@@ -4,6 +4,7 @@ import uvicorn
 from fastapi import Depends, FastAPI, Request
 from fastapi.responses import JSONResponse
 
+from auth.routes.jwt_auth import router as jwt_auth_router
 from employee.routes.employee import router as employee_router
 from note.routes.note import router as note_router
 from project.routes.project import router as project_router
@@ -17,6 +18,7 @@ app.include_router(note_router)
 app.include_router(employee_router)
 app.include_router(project_router)
 app.include_router(task_router)
+app.include_router(jwt_auth_router)
 
 
 def data_is_valid(data: dict) -> bool:

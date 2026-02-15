@@ -22,7 +22,7 @@
 *PostgreSQL схема показывающиеся все связи*
 
 ### Key Features
-![Feature 1](images_for_readme/feature1.png) # авторизация (This feature is in the process)
+![Feature 1](images_for_readme/auth.png) # авторизация 
 ![Feature 2](images_for_readme/response_schema.png) response schema 'get task' с one2many и one2one связями
 ![Feature 3](images_for_readme/data_uploaded_by_user.png) # Возможность загружать собственные данные
 

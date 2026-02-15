@@ -31,8 +31,8 @@ def auth_user_issue_jwt_refresh(
     return TokenInfo(access_token=access_token)
 
 
-@router.get("/check/")
-def auth_person_check(
+@router.get("/me/")
+def auth_person_me(
     payload: dict = Depends(get_current_token_payload),
     user=Depends(get_current_auth_user),
 ):

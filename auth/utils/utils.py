@@ -34,7 +34,7 @@ def decode_jwt(
     key: str = auth_config.public_key_path.read_text(),
     algorithm: str = auth_config.algorithm,
 ):
-    decoded = jwt.decode(jwt_token, key, algorithm)
+    decoded = jwt.decode(jwt_token, key, algorithms=[algorithm])
     return decoded
 
 
